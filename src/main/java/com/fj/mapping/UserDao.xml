@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fj.dao.UserDao" >
+  <sql id="userColumns" >
+    a.id AS "id",
+    a.name AS "name",
+    a.password AS "password"
+  </sql>
+
+  <select id="get" resultType="User">
+    SELECT
+    <include refid="userColumns"/>
+    FROM t_user a
+    WHERE a.id = #{id}
+  </select>
+
+
+  <select id="getUserById" resultType="User">
+    select
+    <include refid="userColumns" />
+    from t_user a
+    where a.id = #{id}
+  </select>
+  <select id="selectByPrimaryKey" resultType="User">
+    select 
+    <include refid="userColumns" />
+    from t_user a
+    where a.id = #{id}
+  </select>
+
+  <select id="findAllUser" resultType="User">
+    SELECT
+    <include refid="userColumns"/>
+    FROM t_user a
+  </select>
+  <delete id="deleteByPrimaryKey">
+    delete from t_user a
+    where a.id = #{id}
+  </delete>
+  <insert id="insert">
+    insert into t_user (
+    id,
+    name,
+    password
+    )
+    values (
+    #{id},
+    #{name},
+    #{password}
+    )
+  </insert>
+
+  <update id="updateByPrimaryKey">
+    update t_user
+    set name = #{name},
+      password = #{password},
+    where id = #{id}
+  </update>
+</mapper>
